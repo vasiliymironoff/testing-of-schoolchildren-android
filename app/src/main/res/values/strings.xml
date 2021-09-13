@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Дурацкий проект</string>
+    <string name="title_study">Обучение</string>
+    <string name="title_statistics">Статистика</string>
+    <string name="title_profile">Профиль</string>
+    <string name="statistics">Статистика</string>
+    <string name="study">Обучение</string>
+    <string name="profile">Профиль</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="settings">Настройки</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="dark_theme_key">dark_theme</string>
+    <string name="login">Войти</string>
+    <string name="hint_email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="login_to_registration">Создать аккаунт</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="registration">Зарегистрироваться</string>
+    <string name="registration_to_login">Войти в существующий аккаунт</string>
+    <string name="password_repeat">Повторите пароль</string>
+    <string name="last_name">Фамилия</string>
+    <string name="first_name">Имя</string>
+    <string name="is_teacher">учитель</string>
+    <string name="token">token</string>
+    <string name="settings_exit">exit</string>
+    <string name="first_start">firstStart</string>
+    <string name="isAuth">isAuth</string>
+</resources>
