@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.14351851851851852" />
+        <entry key="app/src/main/res/drawable/ic_baseline_circle_24.xml" value="0.3635897435897436" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3635897435897436" />
+        <entry key="app/src/main/res/drawable/ic_round_mode_comment_24.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/percent.xml" value="0.14351851851851852" />
+        <entry key="app/src/main/res/drawable/splash.xml" value="0.3635897435897436" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/exam_detail_fragment.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_exam_create.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/fragment_exam_detail.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/fragment_exam_passing.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_study.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/layout_answer.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/layout/layout_answer_radio.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/layout/layout_checkanswers.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/layout/layout_comment.xml" value="0.6105769230769231" />
+        <entry key="app/src/main/res/layout/layout_exam.xml" value="0.22192513368983957" />
+        <entry key="app/src/main/res/layout/layout_radioanswers.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/layout/layout_statistics.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_task.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/layout/login_fragment.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.19583333333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

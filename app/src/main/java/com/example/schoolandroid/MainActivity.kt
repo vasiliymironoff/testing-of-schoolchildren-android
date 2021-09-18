@@ -2,6 +2,8 @@ package com.example.schoolandroid
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -11,11 +13,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.schoolandroid.databinding.ActivityMainBinding
+import com.example.schoolandroid.ui.profile.ProfileViewModel
+import com.example.schoolandroid.ui.study.StudyViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+
+    val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         val navView: BottomNavigationView = binding.navView
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -33,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        if (savedInstanceState == null) {
+            viewModel.fetchMe()
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -49,4 +60,38 @@ class MainActivity : AppCompatActivity() {
         _binding = null
     }
 
+    fun hideUIForPerformanceExam() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        binding.navView.visibility = View.GONE
+    }
+
+    fun showUIForPerformanceExam() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.navView.visibility = View.VISIBLE
+    }
+
+    companion object {
+
+        fun getSubjectFromAbbreviation(ab: String) =
+            when (ab) {
+                "al" -> "Алгебра"
+                "as" -> "Астрономия"
+                "bi" -> "Биология"
+                "ch" -> "Химия"
+                "en" -> "Английский"
+                "gm" -> "Геометрия"
+                "hi" -> "История"
+                "ph" -> "Физика"
+                "ru" -> "Русский язык"
+                "cs" -> "Информатика"
+                "ss" -> "Обществознание"
+                "gg" -> "География"
+                "fl" -> "Иностранный язык"
+                "li" -> "Литература"
+                "ob" -> "ОБЖ"
+
+                else -> "Другой предмет"
+
+            }
+    }
 }

@@ -9,7 +9,14 @@
         android:id="@+id/navigation_study"
         android:name="com.example.schoolandroid.ui.study.StudyFragment"
         android:label="@string/title_study"
-        tools:layout="@layout/fragment_study" />
+        tools:layout="@layout/fragment_study" >
+        <action
+            android:id="@+id/action_navigation_study_to_examDetailFragment"
+            app:destination="@id/examDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_study_to_examCreateFragment"
+            app:destination="@id/examCreateFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_statistics"
@@ -34,5 +41,29 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.schoolandroid.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="@string/settings" />
+    <fragment
+        android:id="@+id/examDetailFragment"
+        android:name="com.example.schoolandroid.ui.examdetail.ExamDetailFragment"
+        android:label="@string/exam_detail_fragment"
+        tools:layout="@layout/fragment_exam_detail" >
+        <argument
+            android:name="examId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_examDetailFragment_to_examPassingFragment"
+            app:destination="@id/examPassingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/examCreateFragment"
+        android:name="com.example.schoolandroid.ui.examcreate.ExamCreateFragment"
+        android:label="@string/fragment_exam_create"
+        tools:layout="@layout/fragment_exam_create" />
+    <fragment
+        android:id="@+id/examPassingFragment"
+        android:name="com.example.schoolandroid.ui.exampassing.ExamPassingFragment"
+        android:label="fragment_exam_passing"
+        tools:layout="@layout/fragment_exam_passing"
+        />
 </navigation>

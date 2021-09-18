@@ -11,7 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.schoolandroid.MainActivity
 import com.example.schoolandroid.R
-import com.example.schoolandroid.databinding.LoginFragmentBinding
+import com.example.schoolandroid.databinding.FragmentLoginBinding
+
 
 class LoginFragment : Fragment() {
 
@@ -19,7 +20,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    private var _binding: LoginFragmentBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: LoginViewModel by activityViewModels()
@@ -28,7 +29,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = LoginFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         val root = binding.root
         binding.toggler.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)

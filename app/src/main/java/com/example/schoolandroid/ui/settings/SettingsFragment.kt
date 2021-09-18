@@ -6,6 +6,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import androidx.preference.SwitchPreferenceCompat
+import com.example.schoolandroid.App
 import com.example.schoolandroid.R
 import com.example.schoolandroid.ui.login.LoginActivity
 
@@ -17,6 +18,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         exitPreference?.setOnPreferenceClickListener {
             startActivity(Intent(activity, LoginActivity::class.java))
             activity?.finish()
+            true
+        }
+        val themePreference = findPreference<Preference>(this.getString(R.string.dark_theme_key))
+        themePreference?.setOnPreferenceClickListener {
+            App.setTheme()
             true
         }
     }

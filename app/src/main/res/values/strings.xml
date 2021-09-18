@@ -27,7 +27,6 @@
     <string name="hint_email">Email</string>
     <string name="password">Пароль</string>
     <string name="login_to_registration">Создать аккаунт</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="registration">Зарегистрироваться</string>
     <string name="registration_to_login">Войти в существующий аккаунт</string>
@@ -39,4 +38,17 @@
     <string name="settings_exit">exit</string>
     <string name="first_start">firstStart</string>
     <string name="isAuth">isAuth</string>
+    <string name="edit_account">Редактировать аккаунт</string>
+    <string name="verbose">Подробнее</string>
+    <string name="start_exam">Начать выполнение</string>
+    <string name="comments">Комментарии</string>
+    <string name="comment_hint">Текст комментария</string>
+    <string name="send_comment">Комментировать</string>
+    <string name="title_comment">Оставить комментарий</string>
+    <string name="fragment_exam_create">Создание проверочной</string>
+    <string name="exam_detail_fragment" />
+    <string name="error">Посмотреть ошибки </string>
+    <string name="positive_button_exam">Прервать</string>
+    <string name="negative_button_exam">Отмена</string>
+    <string name="send_result">Проверить</string>
 </resources>

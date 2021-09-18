@@ -16,12 +16,14 @@ import java.lang.Exception
 class LoginViewModel : ViewModel() {
     private val success = MutableLiveData<Boolean>(false)
 
-    fun registration(firstName: String,
-                     lastName: String,
-                     isTeacher: Boolean,
-                     email: String,
-                     password: String,
-                     passwordRepeat: String) {
+    fun registration(
+        firstName: String,
+        lastName: String,
+        isTeacher: Boolean,
+        email: String,
+        password: String,
+        passwordRepeat: String
+    ) {
         if (password.trim() != passwordRepeat.trim()) {
             //
             return
@@ -29,11 +31,15 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = withContext(Dispatchers.IO) {
-                    App.getService().registration(NewUser(firstName.trim(),
-                        lastName.trim(),
-                        isTeacher,
-                        email.trim(),
-                        password.trim()))
+                    App.getService().registration(
+                        NewUser(
+                            firstName.trim(),
+                            lastName.trim(),
+                            isTeacher,
+                            email.trim(),
+                            password.trim()
+                        )
+                    )
                 }
                 login(email.trim(), password.trim())
             } catch (e: Exception) {

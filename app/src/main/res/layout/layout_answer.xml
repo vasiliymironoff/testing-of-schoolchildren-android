@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <import type="com.example.schoolandroid.ui.exampassing.TextAndBoolean" />
+
+        <variable
+            name="data"
+            type="ObservableField&lt;TextAndBoolean&gt;" />
+
+        <variable
+            name="manyOption"
+            type="Boolean" />
+
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/answer_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="@={data.check}"
+            android:text="@{data.text}"
+            android:visibility="@{manyOption ? View.VISIBLE : View.GONE}" />
+
+        <RadioButton
+            android:id="@+id/answer_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="@={data.check}"
+            android:text="@{data.text}"
+            android:visibility="@{manyOption ? View.GONE : View.VISIBLE}" />
+    </FrameLayout>
+</layout>
+
