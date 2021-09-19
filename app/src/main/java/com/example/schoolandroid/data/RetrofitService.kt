@@ -23,6 +23,12 @@ interface RetrofitService {
     @GET("/api/v1/statistics/")
     suspend fun getListStatistics(): List<Statistics>
 
+    @POST("/api/v1/statistics/")
+    suspend fun postStatistics(@Body statisticsForPost: StatisticsForPost): StatisticsResponsePostAndPut
+
+    @PUT("/api/v1/statistics/{id}/")
+    suspend fun putStatistics(@Path("id") idStatistics: Int, @Body statistics: StatisticsForPut): StatisticsResponsePostAndPut
+
     @POST("/api/v1/comments/")
     suspend fun postComment(@Body comment: CommentForPostAndPut): CommentForResponsePostAndPut
 

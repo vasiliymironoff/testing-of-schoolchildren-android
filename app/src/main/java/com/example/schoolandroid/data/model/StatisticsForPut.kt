@@ -2,19 +2,13 @@ package com.example.schoolandroid.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Statistics(
-    @SerializedName("id")
-    val id: Int,
+data class StatisticsForPut(
     @SerializedName("exam")
-    val exam: ExamForStatistics,
+    val exam: Int,
     @SerializedName("grade")
     val grade: Int,
     @SerializedName("total")
     val total: Int,
-    @SerializedName("start_time")
-    val startTime: Double,
-    @SerializedName("end_time")
-    val endTime: Double,
     @SerializedName("errors")
     val errorsStatistics: List<ErrorStatistics>,
 )

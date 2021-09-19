@@ -16,6 +16,8 @@ import com.example.schoolandroid.R
 import com.example.schoolandroid.databinding.FragmentExamPassingBinding
 import com.example.schoolandroid.ui.examdetail.ExamDetailFragment.Companion.EXAM_ID
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.lang.StringBuilder
+import kotlin.math.roundToInt
 
 class ExamPassingFragment : Fragment() {
 
@@ -40,6 +42,7 @@ class ExamPassingFragment : Fragment() {
             binding.title.text = it.title
             taskAdapter.tasks = it.tasks
             taskAdapter.notifyDataSetChanged()
+            viewModel.postStatistics(requireArguments().getInt(EXAM_ID), it.maxScores)
 
         })
         viewModel.time.observe(viewLifecycleOwner, {
@@ -48,6 +51,15 @@ class ExamPassingFragment : Fragment() {
         taskAdapter = TaskAdapter(listOf(), viewModel.answers, requireContext())
         binding.tasks.adapter = taskAdapter
         binding.tasks.layoutManager = LinearLayoutManager(context)
+        binding.sendResult.setOnClickListener {
+            val result = viewModel.checkWork()
+            val messageBuilder = StringBuilder()
+            result.errors.forEach {
+                messageBuilder.append("${it.question}\n")
+            }
+            val message: String = messageBuilder.toString()
+            val resultGrade = "${result.grade}/${result.total} (${((result.grade / result.total.toDouble()) * 100).roundToInt()}%)"
+        }
         return view
     }
 

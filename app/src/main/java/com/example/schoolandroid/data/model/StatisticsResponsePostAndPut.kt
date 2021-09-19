@@ -2,11 +2,11 @@ package com.example.schoolandroid.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Statistics(
+data class StatisticsResponsePostAndPut(
     @SerializedName("id")
     val id: Int,
     @SerializedName("exam")
-    val exam: ExamForStatistics,
+    val exam: Int,
     @SerializedName("grade")
     val grade: Int,
     @SerializedName("total")

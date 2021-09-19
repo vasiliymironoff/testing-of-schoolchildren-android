@@ -65,5 +65,9 @@
         android:name="com.example.schoolandroid.ui.exampassing.ExamPassingFragment"
         android:label="fragment_exam_passing"
         tools:layout="@layout/fragment_exam_passing"
-        />
+        >
+        <action
+            android:id="@+id/action_examPassingFragment_to_navigation_study"
+            app:destination="@id/navigation_study" />
+    </fragment>
 </navigation>

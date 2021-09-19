@@ -1,5 +1,6 @@
 package com.example.schoolandroid.ui.exampassing
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,16 @@ class TaskAdapter(
     class TaskHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
         private val binding = LayoutTaskBinding.bind(view)
         private lateinit var adapter: AnswerAdapter
+
         fun bind(task: Task, position: Int, checkableList: List<ObservableField<TextAndBoolean>>) {
-            binding.question.text = "${position + 1}. ${task.question}"
+            val bal = if (task.scores % 10 == 1 && task.scores / 10 != 1) {
+                "балл"
+            } else if (task.scores % 10 in listOf(2, 3, 4) && task.scores / 10 != 1) {
+                "балла"
+            } else {
+                "баллов"
+            }
+            binding.question.text = "${position + 1}. ${task.question} (${task.scores} $bal)"
             adapter = AnswerAdapter(task.answers, task.manyOption, checkableList, context)
             binding.answers.adapter = adapter
             binding.answers.layoutManager = LinearLayoutManager(context)
