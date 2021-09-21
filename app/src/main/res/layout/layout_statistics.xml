@@ -18,6 +18,16 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/size_header" />
 
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/title"
+            android:src="@drawable/ic_round_share_24"
+            android:tint="@color/orange_700" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/grade"
             android:layout_width="wrap_content"
@@ -65,6 +75,28 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/list_error_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/time_passing"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/verbose_error" />
+
+        <TextView
+            android:id="@+id/not_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/time_passing"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="18dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/not_complete"
+            android:textColor="@color/percent_10"
+            android:textSize="@dimen/h2"
+            android:visibility="visible" />
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

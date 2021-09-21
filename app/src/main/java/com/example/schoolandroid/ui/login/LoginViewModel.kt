@@ -31,7 +31,7 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = withContext(Dispatchers.IO) {
-                    App.getService().registration(
+                    App.getService()?.registration(
                         NewUser(
                             firstName.trim(),
                             lastName.trim(),
@@ -53,10 +53,12 @@ class LoginViewModel : ViewModel() {
         try {
             viewModelScope.launch {
                 val result = withContext(Dispatchers.IO) {
-                    App.getService().login(EmailAndPassword(email.trim(), password.trim()))
+                    App.getService()?.login(EmailAndPassword(email.trim(), password.trim()))
                 }
-                App.saveToken(result.token)
-                success.value = true
+                if (result != null) {
+                    App.saveToken(result.token)
+                    success.value = true
+                }
             }
         } catch (e: Exception) {
             Log.e("TAG", e.toString())

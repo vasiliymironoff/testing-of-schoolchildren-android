@@ -18,9 +18,11 @@ class StudyViewModel : ViewModel() {
         try {
             viewModelScope.launch {
                 val response = withContext(Dispatchers.IO) {
-                    App.getService().getListExams()
+                    App.getService()?.getListExams()
                 }
-                exams.value = response
+                if (response != null) {
+                    exams.value = response!!
+                }
             }
         } catch (e: Exception) {
             Log.e("TAG", e.toString())

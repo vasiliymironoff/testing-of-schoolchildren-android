@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -58,7 +59,11 @@ class ExamPassingFragment : Fragment() {
                 messageBuilder.append("${it.question}\n")
             }
             val message: String = messageBuilder.toString()
-            val resultGrade = "${result.grade}/${result.total} (${((result.grade / result.total.toDouble()) * 100).roundToInt()}%)"
+
+            findNavController().navigate(R.id.action_examPassingFragment_to_resultFragment,
+                bundleOf(ResultFragment.GRADE to result.grade,
+                                ResultFragment.TOTAL to result.total,
+                                ResultFragment.MESSAGE to message))
         }
         return view
     }
@@ -74,7 +79,7 @@ class ExamPassingFragment : Fragment() {
                     getString(R.string.positive_button_exam),
                     DialogInterface.OnClickListener { dialog, id ->
                         (activity as MainActivity).showUIForPerformanceExam()
-                        findNavController().popBackStack()
+                        findNavController().navigate(R.id.action_examPassingFragment_to_navigation_study)
                     })
                 setNeutralButton(
                     getString(R.string.negative_button_exam),

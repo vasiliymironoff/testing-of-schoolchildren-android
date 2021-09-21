@@ -69,5 +69,17 @@
         <action
             android:id="@+id/action_examPassingFragment_to_navigation_study"
             app:destination="@id/navigation_study" />
+        <action
+            android:id="@+id/action_examPassingFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.schoolandroid.ui.exampassing.ResultFragment"
+        android:label="@string/result" >
+        <action
+            android:id="@+id/action_resultFragment_to_navigation_study"
+            app:destination="@id/navigation_study" />
+    </fragment>
+
 </navigation>

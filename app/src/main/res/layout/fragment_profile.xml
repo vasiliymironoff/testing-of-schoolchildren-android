@@ -30,25 +30,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="25dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/avatar"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
+                    <FrameLayout
+                        android:id="@+id/frame_avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/avatar"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            app:civ_circle_background_color="@color/blue_200"
+                            android:src="@color/transparent" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/add_photo_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_round_add_photo_alternate_24"
+                            android:layout_gravity="center" />
+                    </FrameLayout>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_toStartOf="@+id/avatar"
+                        android:layout_toStartOf="@+id/frame_avatar"
                         android:textSize="@dimen/size_header"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/avatar"
+                        app:layout_constraintBottom_toBottomOf="@+id/frame_avatar"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/avatar"
+                        app:layout_constraintStart_toEndOf="@+id/frame_avatar"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -59,7 +71,7 @@
                         android:textSize="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/avatar" />
+                        app:layout_constraintTop_toBottomOf="@+id/frame_avatar" />
 
                     <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"

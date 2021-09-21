@@ -1,21 +1,16 @@
 package com.example.schoolandroid.ui.statistics
 
-import android.content.Context
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.ListAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.MainActivity
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.model.Statistics
 import com.example.schoolandroid.databinding.LayoutStatisticsBinding
 import com.example.schoolandroid.util.Util
-import java.text.SimpleDateFormat
-import kotlin.math.acos
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.math.roundToInt
 
 class StatisticsAdapter(
@@ -33,24 +28,43 @@ class StatisticsAdapter(
             binding.grade.text = "Набранный балл: ${stat.grade}"
             val percent = ((stat.grade / stat.total.toDouble()) * 100).roundToInt()
             binding.percent.text = " ${percent.toString()}%"
+            val startTime = Util.utilTimeToFormatForUI(stat.startTime)
             binding.startTime.text =
-                "Начало выполнения: ${Util.utilTimeToFormatForUI(stat.startTime)}"
+                "Начало выполнения: ${startTime}"
             binding.timePassing.text =
                 "Время выполнения: ${((stat.endTime - stat.startTime) / 60).roundToInt()} минуты"
-            val color = when (percent / 10 * 10) {
-                10 -> R.color.percent_10
-                20 -> R.color.percent_20
-                30 -> R.color.percent_30
-                40 -> R.color.percent_40
-                50 -> R.color.percent_50
-                60 -> R.color.percent_60
-                70 -> R.color.percent_70
-                80 -> R.color.percent_80
-                90 -> R.color.percent_90
-                100 -> R.color.percent_100
-                else -> R.color.percent_10
+            binding.color.setCircleBackgroundColorResource(Util.percentToColor(percent))
+            if (stat.endTime.toInt() == stat.startTime.toInt()) {
+                binding.notComplete.visibility = View.VISIBLE
+            } else {
+                binding.notComplete.visibility = View.GONE
             }
-            binding.color.setCircleBackgroundColorResource(color)
+
+            if (stat.errorsStatistics.isNotEmpty()) {
+                binding.listErrorButton.visibility = View.VISIBLE
+                val stringBuilder = StringBuilder()
+                for (elem in stat.errorsStatistics) {
+                    stringBuilder.append("${elem.question}\n")
+                }
+                val errors: String = stringBuilder.toString()
+                binding.listErrorButton.setOnClickListener {
+                    val alertDialog: AlertDialog? = activity?.let {
+                        val builder = MaterialAlertDialogBuilder(it)
+                        builder.apply {
+                            setTitle(activity.getString(R.string.title_dialog_errors))
+                            setPositiveButton("OK", { dialog, id ->
+                                dialog.cancel()
+                            })
+                            setMessage(errors)
+                        }
+                        builder.create()
+                    }
+                    alertDialog?.show()
+                }
+            } else {
+                binding.listErrorButton.visibility = View.GONE
+            }
+
         }
     }
 

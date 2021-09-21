@@ -2,9 +2,14 @@ package com.example.schoolandroid
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.os.Handler
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.example.schoolandroid.data.RetrofitService
+import com.example.schoolandroid.util.Util
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,8 +28,17 @@ class App : Application() {
     companion object {
         private lateinit var retrofitClient: RetrofitService
         private lateinit var app: Application
-        fun getService(): RetrofitService {
-            return retrofitClient
+
+        suspend fun getService(): RetrofitService? {
+            return if (Util.isNetworkAvailable(app.applicationContext)) {
+                retrofitClient
+            } else {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(app.applicationContext, app.getString(R.string.none_internet), Toast.LENGTH_LONG).show()
+                }
+
+                null
+            }
         }
 
         public fun setTheme() {

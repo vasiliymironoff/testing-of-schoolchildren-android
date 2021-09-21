@@ -16,6 +16,6 @@ class Me(
     @SerializedName("is_teacher")
     public val isTeacher: Boolean,
     @SerializedName("avatar")
-    public val avatar: String
+    public var avatar: String?
 ) {
 }

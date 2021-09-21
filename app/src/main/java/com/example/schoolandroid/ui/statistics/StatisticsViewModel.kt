@@ -24,9 +24,11 @@ class StatisticsViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {
-                    App.getService().getListStatistics()
+                    App.getService()?.getListStatistics()
                 }
-                statistics.value = response
+                if (response != null) {
+                    statistics.value = response!!
+                }
             } catch (e: Exception) {
                 Log.e("TAG", e.toString())
             }

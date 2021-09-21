@@ -26,26 +26,28 @@ class ExamPassingViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {
-                    App.getService().getExamDetail(id)
+                    App.getService()?.getExamDetail(id)
                 }
-                exam.value = response
-                val answersBoolean = ArrayList<ArrayList<ObservableField<TextAndBoolean>>>()
-                val lastIndexTasks = response.tasks.size - 1
-                for (i in 0..lastIndexTasks) {
-                    answersBoolean.add(ArrayList())
-                    val lastIndexAnswers = response.tasks[i].answers.size - 1
-                    for (j in 0..lastIndexAnswers) {
-                        answersBoolean[i].add(
-                            ObservableField(
-                                TextAndBoolean(
-                                    response.tasks[i].answers[j].text,
-                                    false
+                if (response != null) {
+                    exam.value = response!!
+                    val answersBoolean = ArrayList<ArrayList<ObservableField<TextAndBoolean>>>()
+                    val lastIndexTasks = response.tasks.size - 1
+                    for (i in 0..lastIndexTasks) {
+                        answersBoolean.add(ArrayList())
+                        val lastIndexAnswers = response.tasks[i].answers.size - 1
+                        for (j in 0..lastIndexAnswers) {
+                            answersBoolean[i].add(
+                                ObservableField(
+                                    TextAndBoolean(
+                                        response.tasks[i].answers[j].text,
+                                        false
+                                    )
                                 )
                             )
-                        )
+                        }
                     }
+                    answers.addAll(answersBoolean)
                 }
-                answers.addAll(answersBoolean)
             } catch (e: Exception) {
                 Log.e("TAG", e.toString())
             }
@@ -56,9 +58,11 @@ class ExamPassingViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {
-                    App.getService().postStatistics(StatisticsForPost(exam, 0, total))
+                    App.getService()?.postStatistics(StatisticsForPost(exam, 0, total))
                 }
-                idStatistics.value = response.id
+                if (response != null) {
+                    idStatistics.value = response.id
+                }
             } catch (e: Exception) {
                 Log.e("TAG", e.toString())
             }
@@ -90,7 +94,7 @@ class ExamPassingViewModel : ViewModel() {
             try {
                 Log.e("TAG", "PUT")
                 val response = withContext(Dispatchers.IO) {
-                    App.getService().putStatistics(idStatistics.value!!, StatisticsForPut(exam.value!!.id, grade, 0, errorsStatistics))
+                    App.getService()?.putStatistics(idStatistics.value!!, StatisticsForPut(exam.value!!.id, grade, 0, errorsStatistics))
                 }
             } catch (e: Exception) {
                 Log.e("TAG", e.toString())

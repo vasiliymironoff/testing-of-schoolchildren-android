@@ -1,6 +1,12 @@
 package com.example.schoolandroid
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -13,6 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.schoolandroid.databinding.ActivityMainBinding
+import com.example.schoolandroid.ui.profile.ProfileFragment
 import com.example.schoolandroid.ui.profile.ProfileViewModel
 import com.example.schoolandroid.ui.study.StudyViewModel
 
@@ -69,7 +76,18 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.navView.visibility = View.VISIBLE
     }
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.e("TAG", "Bitmap")
+        if (requestCode == ProfileFragment.PICK && resultCode == Activity.RESULT_OK) {
+            val uri: Uri? = data?.data
+            if (uri != null) {
+                val inputStream = contentResolver?.openInputStream(uri)
+                val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
+                viewModel.putAvatar(bitmap)
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
     companion object {
 
         fun getSubjectFromAbbreviation(ab: String) =

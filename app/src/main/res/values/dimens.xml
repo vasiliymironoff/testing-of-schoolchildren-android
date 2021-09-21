@@ -9,8 +9,8 @@
     <!--    TextSize    -->
 
     <dimen name="h3">16dp</dimen>
-    <dimen name="h1">20dp</dimen>
-
+    <dimen name="h2">20dp</dimen>
+    <dimen name="h1">40dp</dimen>
 
     <dimen name="size_header">24dp</dimen>
 
@@ -20,4 +20,5 @@
     <dimen name="percent_circle_size">45dp</dimen>
 
     <dimen name="margin_fab">16dp</dimen>
+    <dimen name="percent_result_size">200dp</dimen>
 </resources>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -28,22 +29,24 @@ class ExamDetailFragment : Fragment() {
     private val viewModel: ExamDetailViewModel by viewModels()
     private var _binding: FragmentExamDetailBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var adapter: CommentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_exam_detail, container, false)
-
-        _binding = FragmentExamDetailBinding.bind(view)
-        adapter = CommentAdapter(listOf())
-        binding.recyclerComments.adapter = adapter
-        binding.recyclerComments.layoutManager = LinearLayoutManager(context)
         if (savedInstanceState == null) {
             viewModel.fetchExam(requireArguments().getInt(EXAM_ID))
         }
+        val view = inflater.inflate(R.layout.fragment_exam_detail, container, false)
+        _binding = FragmentExamDetailBinding.bind(view)
+        profileViewModel.getCurrentUser().observe(viewLifecycleOwner, {
+            adapter = CommentAdapter(listOf(), it.id, viewModel)
+            binding.recyclerComments.adapter = adapter
+        })
+
+        binding.recyclerComments.layoutManager = LinearLayoutManager(context)
+
         viewModel.getExam().observe(viewLifecycleOwner, {
             (activity as AppCompatActivity).supportActionBar?.title = it.title
             Picasso.get()
@@ -76,8 +79,24 @@ class ExamDetailFragment : Fragment() {
                 binding.textComment.text.toString()
             )
             val author = profileViewModel.getUserForAuthor()
-            viewModel.postComment(comment, author)
+            viewModel.sendComment(comment, author)
             binding.textComment.text = null
+            binding.sendComment.text = getString(R.string.send_comment)
+        }
+
+        viewModel.getEditComment().observe(viewLifecycleOwner, {
+            binding.textComment.setText(it.text)
+            binding.sendComment.text = "Обновить комментарий"
+        })
+
+        (activity as MainActivity).onBackPressedDispatcher.addCallback {
+            if (viewModel.isEdit) {
+                viewModel.isEdit = false
+                binding.textComment.text = null
+                binding.sendComment.text = getString(R.string.send_comment)
+            } else {
+                findNavController().popBackStack()
+            }
         }
         return view
     }

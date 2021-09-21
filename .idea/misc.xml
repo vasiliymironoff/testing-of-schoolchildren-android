@@ -5,10 +5,14 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.14351851851851852" />
         <entry key="app/src/main/res/drawable/ic_baseline_circle_24.xml" value="0.3635897435897436" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3635897435897436" />
+        <entry key="app/src/main/res/drawable/ic_round_add_photo_alternate_24.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_round_mode_comment_24.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/ic_round_share_24.xml" value="0.16296296296296298" />
         <entry key="app/src/main/res/drawable/percent.xml" value="0.14351851851851852" />
         <entry key="app/src/main/res/drawable/splash.xml" value="0.3635897435897436" />
+        <entry key="app/src/main/res/layout-land/fragment_result.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/exam_detail_fragment.xml" value="0.18" />
@@ -18,15 +22,16 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/fragment_result.xml" value="0.221875" />
         <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_study.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/layout_answer.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/layout/layout_answer_radio.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/layout/layout_checkanswers.xml" value="0.2677083333333333" />
-        <entry key="app/src/main/res/layout/layout_comment.xml" value="0.6105769230769231" />
+        <entry key="app/src/main/res/layout/layout_comment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_exam.xml" value="0.22192513368983957" />
         <entry key="app/src/main/res/layout/layout_radioanswers.xml" value="0.2677083333333333" />
-        <entry key="app/src/main/res/layout/layout_statistics.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_statistics.xml" value="0.4315937940761636" />
         <entry key="app/src/main/res/layout/layout_task.xml" value="0.2677083333333333" />
         <entry key="app/src/main/res/layout/login_fragment.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.19583333333333333" />

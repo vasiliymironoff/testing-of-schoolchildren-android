@@ -52,4 +52,11 @@
     <string name="negative_button_exam">Отмена</string>
     <string name="send_result">Проверить</string>
     <string name="exit_from_passing_fragment">Выйти</string>
+    <string name="none_internet">Отсутствует подключение к сети</string>
+    <string name="to_main">Вернуться на главную</string>
+    <string name="errors">Ошибки:</string>
+    <string name="result">Результат</string>
+    <string name="verbose_error">Список ошибок</string>
+    <string name="title_dialog_errors">Список ошибок</string>
+    <string name="not_complete">Не завершено</string>
 </resources>
