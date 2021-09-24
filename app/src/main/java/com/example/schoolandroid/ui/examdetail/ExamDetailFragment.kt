@@ -17,6 +17,7 @@ import com.example.schoolandroid.R
 import com.example.schoolandroid.data.model.CommentForPostAndPut
 import com.example.schoolandroid.databinding.FragmentExamDetailBinding
 import com.example.schoolandroid.ui.profile.ProfileViewModel
+import com.example.schoolandroid.util.Util
 import com.squareup.picasso.Picasso
 
 class ExamDetailFragment : Fragment() {
@@ -56,7 +57,7 @@ class ExamDetailFragment : Fragment() {
             binding.title.text = it.title
             binding.classroom.text = "Класс: ${it.classRoom} класс"
             binding.description.text = "Описание: ${it.description}"
-            binding.subject.text = "Предмет: ${MainActivity.getSubjectFromAbbreviation(it.subject)}"
+            binding.subject.text = "Предмет: ${Util.getSubjectFromAbbreviation(it.subject)}"
             binding.maxScopes.text = "Максимальный балл: ${it.maxScores}"
             binding.countTask.text = "Количество заданий: ${it.countTask}"
             if (it.comments.isEmpty()) {

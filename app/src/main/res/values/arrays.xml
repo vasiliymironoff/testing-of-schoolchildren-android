@@ -9,4 +9,34 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+    <string-array name="subject_choices">
+        <item>Алгебра</item>
+        <item>Астрономия</item>
+        <item>Биология</item>
+        <item>Химия</item>
+        <item>Английский</item>
+        <item>Геометрия</item>
+        <item>История</item>
+        <item>Физика</item>
+        <item>Русский язык</item>
+        <item>Информатика</item>
+        <item>Обществознание</item>
+        <item>География</item>
+        <item>Иностранный язык</item>
+        <item>Литература</item>
+        <item>ОБЖ</item>
+    </string-array>
+    <string-array name="classroom_choices">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
 </resources>

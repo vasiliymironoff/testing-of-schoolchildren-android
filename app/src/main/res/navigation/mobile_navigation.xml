@@ -14,8 +14,8 @@
             android:id="@+id/action_navigation_study_to_examDetailFragment"
             app:destination="@id/examDetailFragment" />
         <action
-            android:id="@+id/action_navigation_study_to_examCreateFragment"
-            app:destination="@id/examCreateFragment" />
+            android:id="@+id/action_navigation_study_to_examEditFragment"
+            app:destination="@id/examEditFragment" />
     </fragment>
 
     <fragment
@@ -55,11 +55,7 @@
             android:id="@+id/action_examDetailFragment_to_examPassingFragment"
             app:destination="@id/examPassingFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/examCreateFragment"
-        android:name="com.example.schoolandroid.ui.examcreate.ExamCreateFragment"
-        android:label="@string/fragment_exam_create"
-        tools:layout="@layout/fragment_exam_create" />
+
     <fragment
         android:id="@+id/examPassingFragment"
         android:name="com.example.schoolandroid.ui.exampassing.ExamPassingFragment"
@@ -81,5 +77,9 @@
             android:id="@+id/action_resultFragment_to_navigation_study"
             app:destination="@id/navigation_study" />
     </fragment>
+    <fragment
+        android:id="@+id/examEditFragment"
+        android:name="com.example.schoolandroid.ui.examedit.ExamEditFragment"
+        android:label="@string/exam_editfragment" />
 
 </navigation>

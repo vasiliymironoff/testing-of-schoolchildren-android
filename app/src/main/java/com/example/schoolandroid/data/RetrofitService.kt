@@ -41,6 +41,9 @@ interface RetrofitService {
     @GET("api/v1/exams-detail/{id}/")
     suspend fun getExamDetail(@Path("id") id: Int): ExamWithTaskForRetrieve
 
+    @POST("/api/v1/exams-detail/")
+    suspend fun postExamDetail(@Body newExam: NewExam)
+
     @PUT("/api/v1/profiles/{id}/")
     suspend fun putProfile(@Path("id") id: Int, @Body avatar: Avatar): Avatar
 }

@@ -21,4 +21,7 @@
 
     <dimen name="margin_fab">16dp</dimen>
     <dimen name="percent_result_size">200dp</dimen>
+
+    <dimen name="margin_vertical_input_field">20dp</dimen>
+    <dimen name="size_icon_add_task">28dp</dimen>
 </resources>

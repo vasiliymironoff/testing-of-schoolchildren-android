@@ -59,4 +59,16 @@
     <string name="verbose_error">Список ошибок</string>
     <string name="title_dialog_errors">Список ошибок</string>
     <string name="not_complete">Не завершено</string>
+    <string name="exam_editfragment" />
+    <string name="title">Заголовок</string>
+    <string name="description">Описание</string>
+    <string name="subject">Предмет</string>
+    <string name="classroom">Класс</string>
+    <string name="publish_exam">Опубликовать</string>
+    <string name="add_exam">Добавление проверочной</string>
+    <string name="question">Вопрос</string>
+    <string name="count_scores">Кол-во баллов:</string>
+    <string name="answer_variant">Вариант ответа</string>
+    <string name="add_task">Добавить задание</string>
+
 </resources>

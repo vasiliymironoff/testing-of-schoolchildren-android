@@ -66,7 +66,13 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
+    fun hideBottomNavigationView() {
+        binding.navView.visibility = View.GONE
+    }
 
+    fun showBottomNavigationView() {
+        binding.navView.visibility = View.VISIBLE
+    }
     fun hideUIForPerformanceExam() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         binding.navView.visibility = View.GONE
@@ -87,29 +93,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
-    }
-    companion object {
-
-        fun getSubjectFromAbbreviation(ab: String) =
-            when (ab) {
-                "al" -> "Алгебра"
-                "as" -> "Астрономия"
-                "bi" -> "Биология"
-                "ch" -> "Химия"
-                "en" -> "Английский"
-                "gm" -> "Геометрия"
-                "hi" -> "История"
-                "ph" -> "Физика"
-                "ru" -> "Русский язык"
-                "cs" -> "Информатика"
-                "ss" -> "Обществознание"
-                "gg" -> "География"
-                "fl" -> "Иностранный язык"
-                "li" -> "Литература"
-                "ob" -> "ОБЖ"
-
-                else -> "Другой предмет"
-
-            }
     }
 }

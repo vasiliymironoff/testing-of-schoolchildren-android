@@ -50,7 +50,7 @@ class StudyFragment : Fragment() {
             binding.swiper.isRefreshing = false
         })
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_study_to_examCreateFragment)
+            findNavController().navigate(R.id.action_navigation_study_to_examEditFragment)
         }
         binding.swiper.setOnRefreshListener {
             studyViewModel.fetchData()

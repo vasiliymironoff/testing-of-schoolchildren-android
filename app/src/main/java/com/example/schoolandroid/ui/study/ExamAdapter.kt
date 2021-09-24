@@ -22,7 +22,7 @@ class ExamAdapter(var exams: List<ExamForList>, val fragment: StudyFragment) :
         fun bind(exam: ExamForList) {
             binding.name.text = "${exam.author.firstName} ${exam.author.lastName}"
             binding.classroom.text = "${exam.classRoom} класс"
-            binding.subject.text = "${MainActivity.getSubjectFromAbbreviation(exam.subject)}"
+            binding.subject.text = "${Util.getSubjectFromAbbreviation(exam.subject)}"
             binding.title.text = "${exam.title}"
 
             binding.publishTime.text = "${Util.utilTimeToFormatForUI(exam.publishTime)}"
