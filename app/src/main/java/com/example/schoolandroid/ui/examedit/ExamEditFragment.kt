@@ -5,8 +5,10 @@ import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +29,9 @@ class ExamEditFragment : Fragment() {
 
     private lateinit var tasksAdapter: NewTaskAdapter
 
+    companion object {
+        const val CREATE_EXAM = "CREATE_EXAM"
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,6 +49,7 @@ class ExamEditFragment : Fragment() {
         initTasksRecycler()
         binding.publishExam.setOnClickListener {
             if(viewModel.postExam(it)) {
+                findNavController().previousBackStackEntry?.savedStateHandle?.set("key", true)
                 findNavController().popBackStack()
             }
         }
@@ -90,6 +96,12 @@ class ExamEditFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.reset) {
+            viewModel.reset()
+        }
+        return super.onOptionsItemSelected(item)
+    }
     override fun onDestroy() {
         super.onDestroy()
         (activity as MainActivity).showBottomNavigationView()

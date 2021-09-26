@@ -13,10 +13,10 @@ import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ExamAdapter(var exams: List<ExamForList>, val fragment: StudyFragment) :
+class ExamAdapter(var exams: List<ExamForList>, val fragment: MovableToVerboseExam) :
     RecyclerView.Adapter<ExamAdapter.ExamHolder>() {
 
-    class ExamHolder(val view: View, val fragment: StudyFragment) : RecyclerView.ViewHolder(view) {
+    class ExamHolder(val view: View, val fragment: MovableToVerboseExam) : RecyclerView.ViewHolder(view) {
         val binding = LayoutExamBinding.bind(view)
 
         fun bind(exam: ExamForList) {

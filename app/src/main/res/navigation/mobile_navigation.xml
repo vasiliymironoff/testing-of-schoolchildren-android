@@ -37,6 +37,12 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             />
+        <action
+            android:id="@+id/action_navigation_profile_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_examDetailFragment"
+            app:destination="@id/examDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -81,5 +87,10 @@
         android:id="@+id/examEditFragment"
         android:name="com.example.schoolandroid.ui.examedit.ExamEditFragment"
         android:label="@string/exam_editfragment" />
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.example.schoolandroid.ui.profileedit.ProfileEditFragment"
+        android:label="@string/fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" />
 
 </navigation>

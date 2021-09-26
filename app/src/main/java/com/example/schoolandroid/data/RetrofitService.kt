@@ -44,6 +44,18 @@ interface RetrofitService {
     @POST("/api/v1/exams-detail/")
     suspend fun postExamDetail(@Body newExam: NewExam)
 
+    @GET("/api/v1/exams-me/")
+    suspend fun getMyExams(): List<ExamForList>
+
     @PUT("/api/v1/profiles/{id}/")
     suspend fun putProfile(@Path("id") id: Int, @Body avatar: Avatar): Avatar
+
+    @PUT("/api/v1/auth/users/me/")
+    suspend fun putMe(@Body name: Name)
+
+    @POST("/api/v1/auth/users/set_email/")
+    suspend fun postEmail(@Body email: Email)
+
+    @POST("/api/v1/auth/users/set_password/")
+    suspend fun postPassword(@Body password: Password)
 }

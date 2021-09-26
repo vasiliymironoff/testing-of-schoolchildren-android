@@ -70,5 +70,13 @@
     <string name="count_scores">Кол-во баллов:</string>
     <string name="answer_variant">Вариант ответа</string>
     <string name="add_task">Добавить задание</string>
+    <string name="new_name">Новое имя</string>
+    <string name="edit_name">Изменить имя</string>
+    <string name="new_surname">Новая фамилия</string>
+    <string name="edit_email">Изменить email</string>
+    <string name="new_email">Новый email</string>
+    <string name="edit_password">Изменить пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="fragment_profile_edit">Редактирование аккаунта</string>
 
 </resources>

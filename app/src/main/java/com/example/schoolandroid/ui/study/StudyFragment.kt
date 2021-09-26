@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.R
 import com.example.schoolandroid.databinding.FragmentStudyBinding
 import com.example.schoolandroid.ui.examdetail.ExamDetailFragment
+import com.example.schoolandroid.ui.examedit.ExamEditFragment.Companion.CREATE_EXAM
 import com.example.schoolandroid.ui.profile.ProfileViewModel
+import com.google.android.material.snackbar.Snackbar
 
-class StudyFragment : Fragment() {
+class StudyFragment : Fragment(), MovableToVerboseExam{
 
     private val studyViewModel: StudyViewModel by activityViewModels()
     private val profileViewModel: ProfileViewModel by activityViewModels()
@@ -56,15 +58,31 @@ class StudyFragment : Fragment() {
             studyViewModel.fetchData()
         }
         binding.swiper.isRefreshing = true
+
         return root
     }
 
+    override fun onStart() {
+        super.onStart()
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Boolean>("key")
+            ?.observe(viewLifecycleOwner) {
+                if (it) {
+                    Snackbar.make(binding.root, "Проверочная опубликована", Snackbar.LENGTH_SHORT).show()
+                    studyViewModel.fetchData()
+                }
+
+        }
+
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    fun moveToVerboseExam(id: Int) {
+    override fun moveToVerboseExam(id: Int) {
         findNavController().navigate(
             R.id.action_navigation_study_to_examDetailFragment,
             bundleOf(ExamDetailFragment.EXAM_ID to id)

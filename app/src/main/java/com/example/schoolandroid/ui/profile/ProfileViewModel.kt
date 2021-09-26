@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.schoolandroid.App
 import com.example.schoolandroid.data.model.Author
 import com.example.schoolandroid.data.model.Avatar
+import com.example.schoolandroid.data.model.ExamForList
 import com.example.schoolandroid.data.model.Me
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +21,7 @@ import java.lang.Exception
 class ProfileViewModel : ViewModel() {
 
     private val currentUser = MutableLiveData<Me>()
-
+    private val myExams = MutableLiveData<List<ExamForList>>()
     fun fetchMe() {
         try {
             viewModelScope.launch {
@@ -35,9 +36,27 @@ class ProfileViewModel : ViewModel() {
             Log.e("TAG", e.toString())
         }
     }
+    fun fetchMyExams() {
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    App.getService()?.getMyExams()
+                }
+                if (response != null) {
+                    myExams.value = response!!
+                }
+            }
+        } catch (e: Exception) {
+
+        }
+    }
 
     fun getCurrentUser(): LiveData<Me> {
         return currentUser
+    }
+
+    fun getMyExams(): LiveData<List<ExamForList>> {
+        return myExams
     }
 
     fun putAvatar(bitmap: Bitmap){

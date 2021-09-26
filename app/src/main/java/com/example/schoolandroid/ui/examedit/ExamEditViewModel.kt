@@ -28,10 +28,9 @@ class ExamEditViewModel : ViewModel() {
     private val tasks = MutableLiveData<ArrayList<ObservableTask>>()
 
     init {
-        val list = ArrayList<ObservableTask>()
-        list.add(getStandardTask())
-        tasks.value = list
+        initListTask()
     }
+
     fun addTask() {
 
         val value = tasks.value
@@ -98,5 +97,16 @@ class ExamEditViewModel : ViewModel() {
 
     fun getTasks(): LiveData<ArrayList<ObservableTask>> {
         return tasks
+    }
+
+    fun initListTask() {
+        val list = ArrayList<ObservableTask>()
+        list.add(getStandardTask())
+        tasks.value = list
+    }
+    fun reset() {
+        title.set("")
+        description.set("")
+        initListTask()
     }
 }

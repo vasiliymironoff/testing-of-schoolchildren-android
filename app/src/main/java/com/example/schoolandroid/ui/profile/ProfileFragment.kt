@@ -1,29 +1,28 @@
 package com.example.schoolandroid.ui.profile
 
-import android.app.Activity
+
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.icu.number.NumberRangeFormatter.with
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.*
-import android.widget.TextView
+import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.schoolandroid.MainActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.schoolandroid.R
+import com.example.schoolandroid.data.model.ExamForList
 import com.example.schoolandroid.databinding.FragmentProfileBinding
+import com.example.schoolandroid.ui.examdetail.ExamDetailFragment
+import com.example.schoolandroid.ui.study.ExamAdapter
+import com.example.schoolandroid.ui.study.MovableToVerboseExam
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), MovableToVerboseExam {
 
     companion object {
         const val PICK = 123
@@ -34,7 +33,7 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    private var adapter: ExamAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,10 +42,6 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
         setHasOptionsMenu(true)
-        if (savedInstanceState == null) {
-            viewModel.fetchMe()
-
-        }
         viewModel.getCurrentUser().observe(viewLifecycleOwner, {
             binding.swiper.isRefreshing = false
             try {
@@ -69,6 +64,8 @@ class ProfileFragment : Fragment() {
                             "Выберите приложения для загрузки фото"), PICK)
                     }
 
+                } else {
+                    viewModel.fetchMe()
                 }
             } catch (e: Exception) {
                 Log.e("TAG", e.toString())
@@ -79,6 +76,23 @@ class ProfileFragment : Fragment() {
             viewModel.fetchMe()
         }
         binding.swiper.isRefreshing = true
+        binding.editProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_profileEditFragment)
+        }
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Boolean>("key")
+            ?.observe(viewLifecycleOwner){
+            if (it) {
+                viewModel.fetchMe()
+            }
+        }
+        adapter = ExamAdapter(ArrayList<ExamForList>(), this)
+        binding.recyclerExamsMe.adapter = adapter
+        binding.recyclerExamsMe.layoutManager = LinearLayoutManager(context)
+        viewModel.fetchMyExams()
+        viewModel.getMyExams().observe(viewLifecycleOwner) {
+            adapter?.exams = it
+            adapter?.notifyDataSetChanged()
+        }
         return root
     }
 
@@ -95,6 +109,12 @@ class ProfileFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun moveToVerboseExam(id: Int) {
+        findNavController().navigate(
+            R.id.action_navigation_profile_to_examDetailFragment,
+            bundleOf(ExamDetailFragment.EXAM_ID to id)
+        )
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
