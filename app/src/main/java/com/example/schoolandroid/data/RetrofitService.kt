@@ -1,6 +1,7 @@
 package com.example.schoolandroid.data
 
 import com.example.schoolandroid.data.model.*
+import retrofit2.Response
 import retrofit2.http.*
 
 interface RetrofitService {
@@ -38,11 +39,14 @@ interface RetrofitService {
         @Body comment: CommentForPostAndPut
     ): CommentForResponsePostAndPut
 
-    @GET("api/v1/exams-detail/{id}/")
+    @GET("/api/v1/exams-detail/{id}/")
     suspend fun getExamDetail(@Path("id") id: Int): ExamWithTaskForRetrieve
 
     @POST("/api/v1/exams-detail/")
     suspend fun postExamDetail(@Body newExam: NewExam)
+
+    @PUT("/api/v1/exams-detail/{id}/")
+    suspend fun putExamDetail(@Path("id") id: Int, @Body putExam: NewExam)
 
     @GET("/api/v1/exams-me/")
     suspend fun getMyExams(): List<ExamForList>
@@ -58,4 +62,10 @@ interface RetrofitService {
 
     @POST("/api/v1/auth/users/set_password/")
     suspend fun postPassword(@Body password: Password)
+
+    @DELETE("/api/v1/tasks/{id}/")
+    suspend fun deleteTask(@Path("id") id: Int): Response<Void>
+
+    @DELETE("/api/v1/answers/{id}/")
+    suspend fun deleteAnswer(@Path("id") id: Int): Response<Void>
 }

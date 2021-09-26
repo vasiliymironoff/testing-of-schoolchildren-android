@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_examDetailFragment"
             app:destination="@id/examDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_examEditFragment"
+            app:destination="@id/examEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

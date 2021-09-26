@@ -12,20 +12,23 @@ import com.example.schoolandroid.databinding.LayoutAddTaskBinding
 import com.example.schoolandroid.ui.examedit.model.ObservableAnswer
 import com.example.schoolandroid.ui.examedit.model.ObservableTask
 
-class NewTaskAdapter(var tasks: ArrayList<ObservableTask>, val context: Context) : RecyclerView.Adapter<NewTaskAdapter.TaskHolder>(){
+class NewTaskAdapter(var tasks: ArrayList<ObservableTask>, val context: Context, val viewModel: ExamEditViewModel) : RecyclerView.Adapter<NewTaskAdapter.TaskHolder>(){
 
-    class TaskHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class TaskHolder(val view: View, val viewModel: ExamEditViewModel) : RecyclerView.ViewHolder(view) {
         val binding = LayoutAddTaskBinding.bind(view)
 
         fun bind(tasks: ArrayList<ObservableTask>, position: Int, context: Context, adapter: NewTaskAdapter) {
             binding.task = tasks[position]
             binding.presenter = Presenter()
             binding.deleteTask.setOnClickListener {
+                if (tasks[position].id != null) {
+                    viewModel.deleteTask(tasks[position].id!!)
+                }
                 tasks.remove(tasks[position])
                 adapter.notifyDataSetChanged()
             }
             binding.questionLayout.hint = context.resources.getString(R.string.question) + " " + (position + 1).toString()
-            val adapter = NewAnswerAdapter(tasks[position].answers)
+            val adapter = NewAnswerAdapter(tasks[position].answers, viewModel)
             binding.addAnswerButton.setOnClickListener {
                 tasks[position].answers.add(ObservableAnswer())
                 adapter.listAnswer = tasks[position].answers
@@ -39,7 +42,7 @@ class NewTaskAdapter(var tasks: ArrayList<ObservableTask>, val context: Context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_add_task, parent, false)
-        return TaskHolder(view)
+        return TaskHolder(view, viewModel)
     }
 
     override fun onBindViewHolder(holder: TaskHolder, position: Int) {

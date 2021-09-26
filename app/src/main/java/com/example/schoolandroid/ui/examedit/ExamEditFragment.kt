@@ -25,13 +25,15 @@ class ExamEditFragment : Fragment() {
     private var _binding: FragmentExamEditBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ExamEditViewModel by activityViewModels()
+    private val viewModel: ExamEditViewModel by viewModels()
 
     private lateinit var tasksAdapter: NewTaskAdapter
 
     companion object {
         const val CREATE_EXAM = "CREATE_EXAM"
+        const val EDIT_EXAM = "EDIT_EXAM"
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,22 +45,41 @@ class ExamEditFragment : Fragment() {
         (activity as MainActivity).hideBottomNavigationView()
         setAutoCompleteTextView(view)
         setTitle()
+
+        if (arguments?.getInt(EDIT_EXAM) != null) {
+            binding.publishExam.text = resources.getString(R.string.publish_edit_exam)
+            viewModel.getExam(requireArguments().getInt(EDIT_EXAM, -1))
+        } else {
+            viewModel.initListTask()
+        }
+
         binding.addTaskButton.setOnClickListener {
             viewModel.addTask()
         }
         initTasksRecycler()
         binding.publishExam.setOnClickListener {
-            if(viewModel.postExam(it)) {
-                findNavController().previousBackStackEntry?.savedStateHandle?.set("key", true)
-                findNavController().popBackStack()
+            if (arguments?.getInt(EDIT_EXAM) != null) {
+                if(viewModel.putExam(it)) {
+                    findNavController().popBackStack()
+                }
+            } else {
+                if(viewModel.postExam(it)) {
+                    findNavController().previousBackStackEntry?.savedStateHandle?.set("key", true)
+                    findNavController().popBackStack()
+                }
             }
+
+
+
         }
+
+
         return view
     }
 
     private fun initTasksRecycler() {
         val recyclerView = binding.root.findViewById<RecyclerView>(R.id.recycler_view_tasks)
-        tasksAdapter = NewTaskAdapter(ArrayList(), requireContext())
+        tasksAdapter = NewTaskAdapter(ArrayList(), requireContext(), viewModel)
         binding.recyclerViewTasks.adapter = tasksAdapter
         binding.recyclerViewTasks.layoutManager = LinearLayoutManager(requireContext())
         viewModel.getTasks().observe(viewLifecycleOwner, {
@@ -88,7 +109,12 @@ class ExamEditFragment : Fragment() {
 
     private fun setTitle() {
         setHasOptionsMenu(true)
-        (activity as MainActivity)?.supportActionBar?.title = resources.getString(R.string.add_exam)
+        if (arguments?.getInt(EDIT_EXAM) != null) {
+            (activity as MainActivity)?.supportActionBar?.title = resources.getString(R.string.edit_exam)
+        } else {
+            (activity as MainActivity)?.supportActionBar?.title = resources.getString(R.string.add_exam)
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

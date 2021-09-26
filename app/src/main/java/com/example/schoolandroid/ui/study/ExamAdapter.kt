@@ -3,11 +3,16 @@ package com.example.schoolandroid.ui.study
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.MainActivity
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.model.ExamForList
 import com.example.schoolandroid.databinding.LayoutExamBinding
+import com.example.schoolandroid.ui.examedit.ExamEditFragment.Companion.EDIT_EXAM
+import com.example.schoolandroid.ui.profile.ProfileFragment
+import com.example.schoolandroid.ui.profileedit.ProfileEditFragment
 import com.example.schoolandroid.util.Util
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
@@ -31,6 +36,13 @@ class ExamAdapter(var exams: List<ExamForList>, val fragment: MovableToVerboseEx
                 .into(binding.avatar)
             binding.verbose.setOnClickListener {
                 fragment.moveToVerboseExam(exam.id)
+            }
+            if (fragment is ProfileFragment) {
+                binding.editExam.visibility = View.VISIBLE
+                binding.editExam.setOnClickListener {
+                    fragment.findNavController().navigate(R.id.action_navigation_profile_to_examEditFragment,
+                        bundleOf(EDIT_EXAM to exam.id))
+                }
             }
         }
     }

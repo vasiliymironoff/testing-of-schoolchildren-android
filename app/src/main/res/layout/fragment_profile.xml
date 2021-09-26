@@ -5,8 +5,7 @@
     tools:context=".ui.profile.ProfileFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/swiper"
-    >
+    android:id="@+id/swiper">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="vertical"
@@ -87,10 +86,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_exams_me"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_card"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:listitem="@layout/layout_exam" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -78,5 +78,7 @@
     <string name="edit_password">Изменить пароль</string>
     <string name="new_password">Новый пароль</string>
     <string name="fragment_profile_edit">Редактирование аккаунта</string>
+    <string name="edit_exam">Изменение проверочной</string>
+    <string name="publish_edit_exam">Изменить проверочную</string>
 
 </resources>
