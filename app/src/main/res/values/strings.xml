@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Дурацкий проект</string>
+    <string name="app_name">Проект</string>
     <string name="title_study">Обучение</string>
-    <string name="title_statistics">Статистика</string>
+    <string name="title_statistics">Результаты</string>
     <string name="title_profile">Профиль</string>
-    <string name="statistics">Статистика</string>
+    <string name="statistics">Результаты</string>
     <string name="study">Обучение</string>
     <string name="profile">Профиль</string>
     <!-- Preference Titles -->

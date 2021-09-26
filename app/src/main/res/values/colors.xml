@@ -19,6 +19,14 @@
 
     <color name="dark">#232323</color>
 
+    <color name="grey_600">#4A6572</color>
+    <color name="grey_700">#344955</color>
+    <color name="grey_800">#232F34</color>
+
+
+    <color name="yellow">#F9AA33</color>
+    <color name="yellow_dark">#E49F38</color>
+
     <color name="percent_10">#F44336</color>
     <color name="percent_20">#EF5350</color>
     <color name="percent_30">#FF7043</color>
@@ -33,5 +41,5 @@
 
     <color name="green">#4CAF50</color>
 
-    <color name="grey">#F1F1F1</color>
+    <color name="grey">#ECECEC</color>
 </resources>

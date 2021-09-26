@@ -22,7 +22,7 @@ class App : Application() {
         super.onCreate()
         app = this
         setTheme()
-        configureRetrofit()
+        configureRetrofit(getToken())
     }
 
     companion object {
@@ -36,7 +36,6 @@ class App : Application() {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(app.applicationContext, app.getString(R.string.none_internet), Toast.LENGTH_LONG).show()
                 }
-
                 null
             }
         }
@@ -50,7 +49,7 @@ class App : Application() {
             }
         }
 
-        private fun configureRetrofit() {
+        private fun configureRetrofit(token: String?) {
             val httpLogging = HttpLoggingInterceptor()
             httpLogging.level = HttpLoggingInterceptor.Level.BODY
 
@@ -59,10 +58,7 @@ class App : Application() {
                     val request = chain.request().newBuilder()
                         .addHeader(
                             "Authorization",
-                            "Token ${
-                                getPreferences().getString(app.getString(R.string.token), "")
-                                    .orEmpty()
-                            }"
+                            "${token}"
                         )
                         .build()
                     return@addInterceptor chain.proceed(request)
@@ -77,7 +73,15 @@ class App : Application() {
                 .build()
             retrofitClient = retrofit.create(RetrofitService::class.java)
         }
-
+        public fun getToken(): String? {
+            var token = getPreferences().getString(app.getString(R.string.token), null)
+            token = if (token == null) {
+                null
+            } else {
+                "Token ${token}"
+            }
+            return token
+        }
         public fun getPreferences() =
             app.getSharedPreferences(app.getString(R.string.app_name), MODE_PRIVATE)
 
@@ -87,6 +91,7 @@ class App : Application() {
                 .putString(app.getString(R.string.token), token)
                 .putBoolean(app.getString(R.string.isAuth), true)
                 .apply()
+            configureRetrofit(getToken())
         }
     }
 
