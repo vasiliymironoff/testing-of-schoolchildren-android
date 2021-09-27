@@ -80,5 +80,12 @@
     <string name="fragment_profile_edit">Редактирование аккаунта</string>
     <string name="edit_exam">Изменение проверочной</string>
     <string name="publish_edit_exam">Изменить проверочную</string>
+    <string name="statistics_not">Результатов пока нет</string>
+    <string name="delete_exam">Удалить проверочную</string>
+    <string name="new_password_repeat">Повторите новый пароль</string>
+    <string name="password_not_match">Пароли не совпадают</string>
+    <string name="warnion">Вы точно хотите удалить проверочную?</string>
+    <string name="message_delete_exam_dialog">Восстановить проверочную будет невозможно</string>
+    <string name="fragment_exam_statistics">Результаты</string>
 
 </resources>

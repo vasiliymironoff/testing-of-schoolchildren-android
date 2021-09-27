@@ -13,6 +13,7 @@ import com.example.schoolandroid.R
 import com.example.schoolandroid.databinding.FragmentProfileEditBinding
 import com.example.schoolandroid.ui.examdetail.ExamDetailViewModel
 import com.example.schoolandroid.ui.profileedit.ProfileEditViewModel.Companion.NAME_OR_EMAIL
+import com.google.android.material.snackbar.Snackbar
 
 class ProfileEditFragment : Fragment() {
 
@@ -44,8 +45,14 @@ class ProfileEditFragment : Fragment() {
                 binding.passwordEmail.text.toString())
         }
         binding.editPassword.setOnClickListener {
-            viewModel.postPassword(binding.passwordPassword.text.toString(),
-                binding.newPassword.text.toString())
+            val newPassword = binding.newPassword.text.toString().trim()
+            val repeatNewPassword = binding.newPasswordRepeat.text.toString().trim()
+            if (newPassword == repeatNewPassword) {
+                viewModel.postPassword(binding.passwordPassword.text.toString(),
+                    newPassword)
+            } else {
+                Snackbar.make(view,resources.getString(R.string.password_not_match), Snackbar.LENGTH_SHORT).show()
+            }
         }
         return view
     }

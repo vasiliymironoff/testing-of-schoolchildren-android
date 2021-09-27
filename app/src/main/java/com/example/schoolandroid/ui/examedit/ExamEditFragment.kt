@@ -1,5 +1,6 @@
 package com.example.schoolandroid.ui.examedit
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
@@ -68,12 +69,7 @@ class ExamEditFragment : Fragment() {
                     findNavController().popBackStack()
                 }
             }
-
-
-
         }
-
-
         return view
     }
 
@@ -118,13 +114,35 @@ class ExamEditFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.edit_exam_menu, menu)
+
+        if (arguments?.getInt(EDIT_EXAM) != null) {
+            inflater.inflate(R.menu.delete_exam, menu)
+        } else {
+            inflater.inflate(R.menu.edit_exam_menu, menu)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.reset) {
             viewModel.reset()
+        }
+        if (item.itemId == R.id.delete_exam) {
+            val alertDialog = activity?.let{
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle(resources.getString(R.string.warnion))
+                    .setMessage(resources.getString(R.string.message_delete_exam_dialog))
+                    .setNegativeButton("Отмена") { dialog, id ->
+                        dialog.cancel()
+                    }
+                    .setPositiveButton("Удалить проверочную") { dialog, id ->
+                        if (viewModel.deleteExam(arguments?.getInt(EDIT_EXAM)!!)) {
+                            findNavController().popBackStack()
+                        }
+                    }
+                builder.create()
+            }
+            alertDialog?.show()
         }
         return super.onOptionsItemSelected(item)
     }

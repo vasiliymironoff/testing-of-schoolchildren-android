@@ -18,6 +18,7 @@ import com.example.schoolandroid.databinding.FragmentProfileBinding
 import com.example.schoolandroid.ui.examdetail.ExamDetailFragment
 import com.example.schoolandroid.ui.study.ExamAdapter
 import com.example.schoolandroid.ui.study.MovableToVerboseExam
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
@@ -42,13 +43,14 @@ class ProfileFragment : Fragment(), MovableToVerboseExam {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
         setHasOptionsMenu(true)
+        viewModel.fetchMyExams()
         viewModel.getCurrentUser().observe(viewLifecycleOwner, {
             binding.swiper.isRefreshing = false
             try {
                 if (it != null) {
                     binding.name.text = "${it.firstName} ${it.lastName}"
 
-                    binding.email.text = "Email: ${it.email}"
+                    binding.email.text = "${it.email}"
 
                     if (it.avatar != null) {
                         binding.addPhotoImage.visibility = View.GONE
@@ -61,8 +63,9 @@ class ProfileFragment : Fragment(), MovableToVerboseExam {
                         val intent = Intent(Intent.ACTION_PICK)
                         intent.type = "image/*"
                         activity?.startActivityForResult(Intent.createChooser(intent,
-                            "Выберите приложения для загрузки фото"), PICK)
+                            "Выберите приложение для загрузки фото"), PICK)
                     }
+
 
                 } else {
                     viewModel.fetchMe()
@@ -74,6 +77,7 @@ class ProfileFragment : Fragment(), MovableToVerboseExam {
         })
         binding.swiper.setOnRefreshListener {
             viewModel.fetchMe()
+            viewModel.fetchMyExams()
         }
         binding.swiper.isRefreshing = true
         binding.editProfile.setOnClickListener {
@@ -88,7 +92,6 @@ class ProfileFragment : Fragment(), MovableToVerboseExam {
         adapter = ExamAdapter(ArrayList<ExamForList>(), this)
         binding.recyclerExamsMe.adapter = adapter
         binding.recyclerExamsMe.layoutManager = LinearLayoutManager(context)
-        viewModel.fetchMyExams()
         viewModel.getMyExams().observe(viewLifecycleOwner) {
             adapter?.exams = it
             adapter?.notifyDataSetChanged()

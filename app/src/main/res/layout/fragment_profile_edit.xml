@@ -74,24 +74,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_vertical_input_field"
+                    app:startIconDrawable="@drawable/ic_round_email_24"
                     android:hint="@string/new_email">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/new_email"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:inputType="textEmailAddress"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_vertical_input_field"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_round_key_24"
                     android:hint="@string/password">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_email"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:inputType="textWebPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
@@ -120,24 +125,42 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_vertical_input_field"
+                    app:endIconMode="password_toggle"
                     android:hint="@string/new_password">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/new_password"
                         android:layout_width="match_parent"
+                        android:inputType="textWebPassword"
                         android:layout_height="match_parent" />
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_vertical_input_field"
+                    app:endIconMode="password_toggle"
+                    android:hint="@string/new_password_repeat">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/new_password_repeat"
+                        android:layout_width="match_parent"
+                        android:inputType="textWebPassword"
+                        android:layout_height="match_parent" />
+                </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_vertical_input_field"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_round_key_24"
                     android:hint="@string/password">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_password"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:inputType="textWebPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton

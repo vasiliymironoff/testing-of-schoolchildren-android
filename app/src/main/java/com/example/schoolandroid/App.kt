@@ -10,11 +10,13 @@ import com.example.schoolandroid.data.RetrofitService
 import com.example.schoolandroid.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.Cache
 import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 
 class App : Application() {
 
@@ -54,18 +56,19 @@ class App : Application() {
             httpLogging.level = HttpLoggingInterceptor.Level.BODY
 
             val okHttpClient = OkHttpClient.Builder()
+                .retryOnConnectionFailure(true)
                 .addInterceptor { chain ->
                     val request = chain.request().newBuilder()
                         .addHeader(
                             "Authorization",
                             "${token}"
                         )
+
                         .build()
                     return@addInterceptor chain.proceed(request)
                 }
                 .addInterceptor(httpLogging)
                 .build()
-
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://192.168.31.123:8000/")
                 .addConverterFactory(GsonConverterFactory.create())

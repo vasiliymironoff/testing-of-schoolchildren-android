@@ -227,5 +227,19 @@ class ExamEditViewModel : ViewModel() {
         initListTask()
     }
 
+    fun deleteExam(examId: Int): Boolean {
+        try {
+            viewModelScope.launch {
+                val response = withContext(Dispatchers.IO) {
+                    App.getService()?.deleteExam(examId)
+                }
+            }
+            return true
+        } catch (e: Exception) {
+            Log.e("TAG", e.toString())
+        }
+        return false
+    }
+
 
 }

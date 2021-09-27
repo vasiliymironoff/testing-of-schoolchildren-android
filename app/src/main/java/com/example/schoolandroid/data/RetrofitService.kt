@@ -68,4 +68,10 @@ interface RetrofitService {
 
     @DELETE("/api/v1/answers/{id}/")
     suspend fun deleteAnswer(@Path("id") id: Int): Response<Void>
+
+    @DELETE("/api/v1/exams-detail/{id}/")
+    suspend fun deleteExam(@Path("id") id: Int): Response<Void>
+
+    @GET("/api/v1/exams-statistics/{id}/")
+    suspend fun getExamStatistics(@Path("id") id: Int): ExamStatistics
 }

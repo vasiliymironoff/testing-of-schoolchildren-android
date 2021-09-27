@@ -22,6 +22,7 @@ object Util {
 
     public fun percentToColor(percent: Int): Int {
         return when (percent / 10 * 10) {
+            0 -> R.color.percent_10
             10 -> R.color.percent_10
             20 -> R.color.percent_20
             30 -> R.color.percent_30
@@ -32,7 +33,7 @@ object Util {
             80 -> R.color.percent_80
             90 -> R.color.percent_90
             100 -> R.color.percent_100
-            else -> R.color.percent_10
+            else -> R.color.percent_100
         }
     }
     fun getSubjectFromAbbreviation(ab: String) =

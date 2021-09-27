@@ -12,18 +12,33 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/card_padding">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/size_header" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
+            android:layout_marginEnd="10dp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/avatar"
+            android:layout_alignBottom="@+id/avatar"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/avatar"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/h2"
+            android:textStyle="bold" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title" />
+            android:layout_below="@id/avatar"
+            android:layout_marginTop="10dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/total"

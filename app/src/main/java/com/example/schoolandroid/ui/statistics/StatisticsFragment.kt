@@ -35,8 +35,13 @@ class StatisticsFragment : Fragment() {
             statisticsViewModel.fetchStatistics()
         }
         statisticsViewModel.getStatistics().observe(viewLifecycleOwner, {
-            adapter.statistics = it
-            adapter.notifyDataSetChanged()
+            if (it.isEmpty()) {
+                binding.notResult.visibility = View.VISIBLE
+            } else {
+                binding.notResult.visibility = View.GONE
+                adapter.statistics = it
+                adapter.notifyDataSetChanged()
+            }
             binding.swiper.isRefreshing = false
         })
         binding.swiper.setOnRefreshListener {

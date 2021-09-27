@@ -2,21 +2,25 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.profile.ProfileFragment"
+    android:id="@+id/swiper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/swiper">
+    tools:context=".ui.profile.ProfileFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/profile_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/card_margin"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -26,48 +30,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="25dp">
+
                     <FrameLayout
                         android:id="@+id/frame_avatar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
+
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/avatar"
-                            android:layout_width="75dp"
-                            android:layout_height="75dp"
-                            app:civ_circle_background_color="@color/blue_200"
-                            android:src="@color/transparent" />
+                            android:layout_width="125dp"
+                            android:layout_height="125dp"
+                            android:src="@color/transparent"
+                            app:civ_border_color="@color/grey_600"
+                            app:civ_border_width="3dp"
+                            app:civ_circle_background_color="@color/blue_200" />
+
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/add_photo_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_round_add_photo_alternate_24"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_round_add_photo_alternate_24" />
                     </FrameLayout>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_toStartOf="@+id/frame_avatar"
+                        android:layout_marginTop="10dp"
                         android:textSize="@dimen/size_header"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/frame_avatar"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/frame_avatar"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textSize="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/frame_avatar" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/name" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/edit_profile"
@@ -86,12 +94,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_exams_me"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_card"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:listitem="@layout/layout_exam" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

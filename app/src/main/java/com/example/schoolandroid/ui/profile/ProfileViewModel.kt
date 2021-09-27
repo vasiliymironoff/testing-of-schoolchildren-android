@@ -1,6 +1,7 @@
 package com.example.schoolandroid.ui.profile
 
 import android.graphics.Bitmap
+import android.net.Uri
 import android.util.Base64
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
+import java.net.URI
 
 class ProfileViewModel : ViewModel() {
 
@@ -59,26 +61,23 @@ class ProfileViewModel : ViewModel() {
         return myExams
     }
 
-    fun putAvatar(bitmap: Bitmap){
+    fun putAvatar(bitmap: Bitmap, uri: Uri){
+
         try {
             viewModelScope.launch {
                 val avatar = withContext(Dispatchers.Default) {
                     val byteArrayOutputStream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream)
                     val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
                     Avatar(Base64.encodeToString(byteArray, Base64.DEFAULT))
                 }
                 val response = withContext(Dispatchers.IO) {
-
                     App.getService()?.putProfile(currentUser.value?.id ?: -1, avatar)
                 }
                 if (response != null) {
-                    val me = currentUser.value!!
-
-                    me.avatar = response.avatar
-                    currentUser.value = me
+                    setNewAvatarForMyExam(uri.toString())
+                    fetchMe()
                 }
-
             }
         } catch (e: Exception) {
             Log.d("Tag", e.toString())
@@ -92,5 +91,13 @@ class ProfileViewModel : ViewModel() {
             currentUser.value?.lastName,
             currentUser.value?.avatar
         )
+    }
+
+    fun setNewAvatarForMyExam(uri: String) {
+        val exams = myExams.value!!
+        for (exam in exams) {
+            exam.author.avatar = uri
+        }
+        myExams.value = exams
     }
 }

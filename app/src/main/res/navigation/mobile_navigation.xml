@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_examDetailFragment_to_examPassingFragment"
             app:destination="@id/examPassingFragment" />
+        <action
+            android:id="@+id/action_examDetailFragment_to_examStatisticsFragment"
+            app:destination="@id/examStatisticsFragment" />
     </fragment>
 
     <fragment
@@ -95,5 +98,10 @@
         android:name="com.example.schoolandroid.ui.profileedit.ProfileEditFragment"
         android:label="@string/fragment_profile_edit"
         tools:layout="@layout/fragment_profile_edit" />
+    <fragment
+        android:id="@+id/examStatisticsFragment"
+        android:name="com.example.schoolandroid.ui.examstatistics.ExamStatisticsFragment"
+        android:label="@string/fragment_exam_statistics"
+        tools:layout="@layout/fragment_exam_statistics" />
 
 </navigation>

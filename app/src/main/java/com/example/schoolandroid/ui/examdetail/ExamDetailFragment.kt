@@ -12,12 +12,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolandroid.MainActivity
 import com.example.schoolandroid.R
 import com.example.schoolandroid.data.model.CommentForPostAndPut
 import com.example.schoolandroid.databinding.FragmentExamDetailBinding
 import com.example.schoolandroid.ui.profile.ProfileViewModel
 import com.example.schoolandroid.util.Util
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 
 class ExamDetailFragment : Fragment() {
@@ -41,12 +43,45 @@ class ExamDetailFragment : Fragment() {
         }
         val view = inflater.inflate(R.layout.fragment_exam_detail, container, false)
         _binding = FragmentExamDetailBinding.bind(view)
-        profileViewModel.getCurrentUser().observe(viewLifecycleOwner, {
-            adapter = CommentAdapter(listOf(), it.id, viewModel)
-            binding.recyclerComments.adapter = adapter
-        })
 
         binding.recyclerComments.layoutManager = LinearLayoutManager(context)
+
+        (activity as MainActivity).onBackPressedDispatcher.addCallback {
+            if (viewModel.isEdit) {
+                viewModel.isEdit = false
+                binding.textComment.text = null
+                binding.sendComment.text = getString(R.string.send_comment)
+            } else {
+                findNavController().popBackStack()
+            }
+        }
+        initClickListener()
+        initLiveData()
+        return view
+    }
+    private fun initClickListener() {
+        binding.sendComment.setOnClickListener {
+            val comment = CommentForPostAndPut(
+                arguments?.getInt(EXAM_ID, -1) ?: -1,
+                binding.textComment.text.toString()
+            )
+            val author = profileViewModel.getUserForAuthor()
+            viewModel.sendComment(comment, author)
+            binding.textComment.text = null
+            binding.sendComment.text = getString(R.string.send_comment)
+        }
+
+        binding.statisticsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_examDetailFragment_to_examStatisticsFragment,
+                bundleOf(EXAM_ID to requireArguments().getInt(EXAM_ID)))
+        }
+
+    }
+    private fun initLiveData() {
+        viewModel.getEditComment().observe(viewLifecycleOwner, {
+            binding.textComment.setText(it.text)
+            binding.sendComment.text = "Обновить комментарий"
+        })
 
         viewModel.getExam().observe(viewLifecycleOwner, {
             (activity as AppCompatActivity).supportActionBar?.title = it.title
@@ -72,34 +107,12 @@ class ExamDetailFragment : Fragment() {
                     bundleOf(EXAM_ID to requireArguments().getInt(EXAM_ID))
                 )
             }
-
-        })
-        binding.sendComment.setOnClickListener {
-            val comment = CommentForPostAndPut(
-                arguments?.getInt(EXAM_ID, -1) ?: -1,
-                binding.textComment.text.toString()
-            )
-            val author = profileViewModel.getUserForAuthor()
-            viewModel.sendComment(comment, author)
-            binding.textComment.text = null
-            binding.sendComment.text = getString(R.string.send_comment)
-        }
-
-        viewModel.getEditComment().observe(viewLifecycleOwner, {
-            binding.textComment.setText(it.text)
-            binding.sendComment.text = "Обновить комментарий"
         })
 
-        (activity as MainActivity).onBackPressedDispatcher.addCallback {
-            if (viewModel.isEdit) {
-                viewModel.isEdit = false
-                binding.textComment.text = null
-                binding.sendComment.text = getString(R.string.send_comment)
-            } else {
-                findNavController().popBackStack()
-            }
-        }
-        return view
+        profileViewModel.getCurrentUser().observe(viewLifecycleOwner, {
+            adapter = CommentAdapter(listOf(), it.id, viewModel)
+            binding.recyclerComments.adapter = adapter
+        })
     }
 
     override fun onDestroyView() {

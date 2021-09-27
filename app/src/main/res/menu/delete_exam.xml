@@ -11,6 +11,10 @@
                 android:icon="@drawable/ic_round_refresh_24"
                 android:title="Сбросить"
                 app:showAsAction="never"/>
+            <item android:id="@+id/delete_exam"
+                android:icon="@drawable/ic_round_delete_24"
+                android:title="@string/delete_exam"
+                app:showAsAction="never"/>
         </menu>
     </item>
 

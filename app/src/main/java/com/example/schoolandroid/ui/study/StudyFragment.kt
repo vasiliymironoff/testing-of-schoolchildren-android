@@ -70,7 +70,6 @@ class StudyFragment : Fragment(), MovableToVerboseExam{
             ?.getLiveData<Boolean>("key")
             ?.observe(viewLifecycleOwner) {
                 if (it) {
-                    Snackbar.make(binding.root, "Проверочная опубликована", Snackbar.LENGTH_SHORT).show()
                     studyViewModel.fetchData()
                 }
 

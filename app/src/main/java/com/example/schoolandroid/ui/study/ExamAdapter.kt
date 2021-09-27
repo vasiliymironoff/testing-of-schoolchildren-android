@@ -14,6 +14,7 @@ import com.example.schoolandroid.ui.examedit.ExamEditFragment.Companion.EDIT_EXA
 import com.example.schoolandroid.ui.profile.ProfileFragment
 import com.example.schoolandroid.ui.profileedit.ProfileEditFragment
 import com.example.schoolandroid.util.Util
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,8 +32,11 @@ class ExamAdapter(var exams: List<ExamForList>, val fragment: MovableToVerboseEx
             binding.title.text = "${exam.title}"
 
             binding.publishTime.text = "${Util.utilTimeToFormatForUI(exam.publishTime)}"
+
             Picasso.get()
                 .load(exam.author.avatar)
+                .networkPolicy(NetworkPolicy.OFFLINE)
+                .resize(50, 50)
                 .into(binding.avatar)
             binding.verbose.setOnClickListener {
                 fragment.moveToVerboseExam(exam.id)

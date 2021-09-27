@@ -10,5 +10,5 @@ data class Author(
     @SerializedName("last_name")
     val lastName: String?,
     @SerializedName("avatar")
-    val avatar: String?,
+    var avatar: String?,
 )

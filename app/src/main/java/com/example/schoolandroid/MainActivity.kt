@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             if (uri != null) {
                 val inputStream = contentResolver?.openInputStream(uri)
                 val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
-                viewModel.putAvatar(bitmap)
+                viewModel.putAvatar(bitmap, uri)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
