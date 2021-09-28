@@ -70,7 +70,7 @@ class App : Application() {
                 .addInterceptor(httpLogging)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.31.123:8000/")
+                .baseUrl("https://vasiliymironov.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()

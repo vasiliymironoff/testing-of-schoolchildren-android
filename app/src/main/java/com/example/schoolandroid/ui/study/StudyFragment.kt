@@ -58,24 +58,9 @@ class StudyFragment : Fragment(), MovableToVerboseExam{
             studyViewModel.fetchData()
         }
         binding.swiper.isRefreshing = true
-
         return root
     }
 
-    override fun onStart() {
-        super.onStart()
-        findNavController()
-            .currentBackStackEntry
-            ?.savedStateHandle
-            ?.getLiveData<Boolean>("key")
-            ?.observe(viewLifecycleOwner) {
-                if (it) {
-                    studyViewModel.fetchData()
-                }
-
-        }
-
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -29,6 +29,11 @@ class ExamEditViewModel : ViewModel() {
     public val description = ObservableField("")
     private val tasks = MutableLiveData<ArrayList<ObservableTask>>()
 
+    private val result = MutableLiveData(false)
+
+    fun getResult(): LiveData<Boolean> {
+        return result
+    }
 
     fun addTask() {
         val value = tasks.value
@@ -67,13 +72,13 @@ class ExamEditViewModel : ViewModel() {
             Log.e("TAG", e.toString())
         }
     }
-    fun putExam(view: View): Boolean {
+    fun putExam(view: View) {
         val title = title.get()!!.trim()
         val classroom = classroom.get()!!
         val subject = subject.get()!!
         val description = description.get()!!.trim()
         if (!validFields(view, title, description, subject, classroom)) {
-            return false
+            return
         }
         try {
             viewModelScope.launch {
@@ -91,24 +96,24 @@ class ExamEditViewModel : ViewModel() {
                 val response = withContext(Dispatchers.IO) {
                     App.getService()?.putExamDetail(examId, exam)
                 }
+                result.value = true
             }
-            return true
+
         } catch (e: Exception) {
             Log.e("TAG", e.toString())
-            return false
         }
     }
 
-    fun postExam(view: View): Boolean {
+    fun postExam(view: View) {
         val title = title.get()!!.trim()
         val classroom = classroom.get()!!
         val subject = subject.get()!!
         val description = description.get()!!.trim()
         if (!validFields(view, title, description, subject, classroom)) {
-            return false
+            return
         }
         try {
-            viewModelScope.launch {
+            val response = viewModelScope.launch(Dispatchers.Main) {
                 val listTask = ArrayList<NewTask>()
                 for (task in tasks.value!!) {
                     listTask.add(task.getTaskForPost())
@@ -123,11 +128,11 @@ class ExamEditViewModel : ViewModel() {
                 val response = withContext(Dispatchers.IO) {
                     App.getService()?.postExamDetail(exam)
                 }
+                result.value = true
             }
-            return true
+
         } catch (e: Exception) {
             Log.e("TAG", e.toString())
-            return false
         }
     }
 

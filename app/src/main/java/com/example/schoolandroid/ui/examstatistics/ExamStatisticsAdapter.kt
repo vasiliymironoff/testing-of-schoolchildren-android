@@ -28,11 +28,16 @@ class ExamStatisticsAdapter(
 
         fun bind(stat: StatisticsForExamStatistics) {
             binding.name.text = "${stat.user.firstName} ${stat.user.lastName}"
-            Picasso.get()
-                .load(stat.user.avatar)
-                .networkPolicy(NetworkPolicy.OFFLINE)
-                .resize(50, 50)
-                .into(binding.avatar)
+            if (stat.user.avatar == null) {
+                binding.avatar.setBackgroundResource(R.drawable.ic_round_person_24)
+            } else {
+                Picasso.get()
+                    .load(stat.user.avatar)
+                    .networkPolicy(NetworkPolicy.OFFLINE)
+                    .resize(50, 50)
+                    .into(binding.avatar)
+            }
+
             binding.total.text = "Максимальный балл: ${stat.total}"
             binding.grade.text = "Набранный балл: ${stat.grade}"
             val percent = ((stat.grade / stat.total.toDouble()) * 100).roundToInt()

@@ -46,7 +46,7 @@
                             android:src="@color/transparent"
                             app:civ_border_color="@color/grey_600"
                             app:civ_border_width="3dp"
-                            app:civ_circle_background_color="@color/blue_200" />
+                            app:civ_circle_background_color="@color/grey_700" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/add_photo_image"

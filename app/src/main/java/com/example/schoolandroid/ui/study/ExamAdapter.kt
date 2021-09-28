@@ -32,12 +32,15 @@ class ExamAdapter(var exams: List<ExamForList>, val fragment: MovableToVerboseEx
             binding.title.text = "${exam.title}"
 
             binding.publishTime.text = "${Util.utilTimeToFormatForUI(exam.publishTime)}"
-
-            Picasso.get()
-                .load(exam.author.avatar)
-                .networkPolicy(NetworkPolicy.OFFLINE)
-                .resize(50, 50)
-                .into(binding.avatar)
+            if (exam.author.avatar == null) {
+                binding.avatar.setBackgroundResource(R.drawable.ic_round_person_24)
+            } else {
+                Picasso.get()
+                    .load(exam.author.avatar)
+                    .networkPolicy(NetworkPolicy.OFFLINE)
+                    .resize(50, 50)
+                    .into(binding.avatar)
+            }
             binding.verbose.setOnClickListener {
                 fragment.moveToVerboseExam(exam.id)
             }

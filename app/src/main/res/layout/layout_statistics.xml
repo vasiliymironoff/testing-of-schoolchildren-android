@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true" >
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/color"
@@ -64,6 +64,7 @@
                 android:text="100%"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
+
         </FrameLayout>
 
         <com.google.android.material.button.MaterialButton

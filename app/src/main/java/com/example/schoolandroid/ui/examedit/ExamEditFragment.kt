@@ -60,14 +60,14 @@ class ExamEditFragment : Fragment() {
         initTasksRecycler()
         binding.publishExam.setOnClickListener {
             if (arguments?.getInt(EDIT_EXAM) != null) {
-                if(viewModel.putExam(it)) {
-                    findNavController().popBackStack()
-                }
+                viewModel.putExam(it)
             } else {
-                if(viewModel.postExam(it)) {
-                    findNavController().previousBackStackEntry?.savedStateHandle?.set("key", true)
-                    findNavController().popBackStack()
-                }
+                viewModel.postExam(it)
+            }
+        }
+        viewModel.getResult().observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().popBackStack()
             }
         }
         return view

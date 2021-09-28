@@ -85,9 +85,13 @@ class ExamDetailFragment : Fragment() {
 
         viewModel.getExam().observe(viewLifecycleOwner, {
             (activity as AppCompatActivity).supportActionBar?.title = it.title
-            Picasso.get()
-                .load(it.author.avatar)
-                .into(binding.avatar)
+            if (it.author.avatar == null) {
+                binding.avatar.setBackgroundResource(R.drawable.ic_round_person_24)
+            } else {
+                Picasso.get()
+                    .load(it.author.avatar)
+                    .into(binding.avatar)
+            }
             binding.name.text = "${it.author.firstName} ${it.author.lastName}"
             binding.title.text = it.title
             binding.classroom.text = "Класс: ${it.classRoom} класс"

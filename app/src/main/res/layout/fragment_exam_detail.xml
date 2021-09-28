@@ -26,6 +26,7 @@
                     android:id="@+id/avatar"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:backgroundTint="@color/grey_600"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +36,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="10dp"
                     android:textSize="@dimen/h2"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/avatar"
                     app:layout_constraintEnd_toStartOf="@+id/statistics_button"
                     app:layout_constraintStart_toEndOf="@+id/avatar"
